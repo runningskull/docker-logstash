@@ -9,8 +9,8 @@ function config_replace() {
     sed -i'.bak' -e ${CMD} ${CONFIG_FILE}
 }
 
-config_replace "ES_HOST" $ES_HOST
-config_replace "ES_PORT" $ES_PORT
+config_replace "ES_HOST" "$ES_HOST"
+config_replace "ES_PORT" "$ES_PORT"
 
 
 java -jar /opt/logstash.jar agent -f /opt/logstash.conf -- web --backend elasticsearch://$ES_HOST:$ES_PORT/
