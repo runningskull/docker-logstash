@@ -6,7 +6,7 @@ CONFIG_FILE="logstash.conf"
 
 function config_replace() {
     CMD="s/{{$1}}/$2/g"
-    sed -i '' ${CMD} ${CONFIG_FILE}
+    sed -i'.bak' -e ${CMD} ${CONFIG_FILE}
 }
 
 config_replace "ES_HOST" $ES_HOST
