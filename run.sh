@@ -1,37 +1,16 @@
 #!/bin/bash
-CFG=${CFG:-}
 ES_HOST=${ES_HOST:-127.0.0.1}
 ES_PORT=${ES_PORT:-9300}
-EMBEDDED="false"
 
-if [ "$ES_HOST" = "127.0.0.1" ] ; then
-    EMBEDDED="true"
-fi
+CONFIG_FILE="logstash.conf"
 
-if [ "$CFG" != "" ]; then
-    wget $CFG -O /opt/logstash.conf --no-check-certificate
-else
-    cat << EOF > /opt/logstash.conf
-input {
-  syslog {
-    type => syslog
-    port => 514
-  }
+function config_replace() {
+    CMD="s/{{$1}}/$2/g"
+    sed -i '' ${CMD} ${CONFIG_FILE}
 }
-output {
-  stdout { debug => true debug_format => "json"}
-EOF
-    if [ "$EMBEDDED" = "true" ]; then
-        cat << EOF >> /opt/logstash.conf
-  elasticsearch { embedded => $EMBEDDED }
-}
-EOF
-    else
-        cat << EOF >> /opt/logstash.conf
-  elasticsearch { embedded => $EMBEDDED host => "$ES_HOST" port => $ES_PORT }
-}
-EOF
-   fi
-fi
+
+config_replace "ES_HOST" $ES_HOST
+config_replace "ES_PORT" $ES_PORT
+
 
 java -jar /opt/logstash.jar agent -f /opt/logstash.conf -- web --backend elasticsearch://$ES_HOST:$ES_PORT/
