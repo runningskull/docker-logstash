@@ -2,7 +2,7 @@
 ES_HOST=${ES_HOST:-127.0.0.1}
 ES_PORT=${ES_PORT:-9300}
 
-CONFIG_FILE="logstash.conf"
+CONFIG_FILE="/opt/logstash.conf"
 
 function config_replace() {
     CMD="s/{{$1}}/$2/g"
