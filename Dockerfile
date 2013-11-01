@@ -9,8 +9,8 @@ ADD logstash.conf /opt/logstash.conf
 RUN chmod +x /usr/local/bin/run
 RUN rm -rf /tmp/*
 
-EXPOSE 514:49514
-EXPOSE 9200:49200
-EXPOSE 9292:49292
-EXPOSE 9300:49300
+EXPOSE 49514:514
+EXPOSE 49200:9200
+EXPOSE 49292:9292
+EXPOSE 49300:9300
 CMD ["/usr/local/bin/run"]
