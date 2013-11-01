@@ -1,6 +1,6 @@
 #!/bin/bash
 ES_HOST=${ES_HOST:-127.0.0.1}
-ES_PORT=${ES_PORT:-9300}
+ES_PORT=${ES_PORT:-59300}
 
 CONFIG_FILE="/opt/logstash.conf"
 
