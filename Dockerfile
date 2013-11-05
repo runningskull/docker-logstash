@@ -14,17 +14,17 @@ RUN chmod +x /usr/local/bin/run
 RUN rm -rf /tmp/*
 
 # Syslog
-EXPOSE 49514:514
+EXPOSE 9514:514
 
 # ElasticSearch
-EXPOSE 49200:9200
-EXPOSE 49300:9300
+EXPOSE 9200:9200
+EXPOSE 9300:9300
 
 # Built-in Kabana Web UI
 # EXPOSE 49292:9292
 
 # Incoming Logs
-EXPOSE 48877:8877
-EXPOSE 45577:5577/udp
+EXPOSE 8877:8877
+EXPOSE 5577:5577/udp
 
 CMD ["/usr/local/bin/run"]
